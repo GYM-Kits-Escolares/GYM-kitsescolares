@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>GYM Kits Escolares - Catálogo Día del Maestro & Agendas 2027</title>
   
   <!-- Favicon con Logo -->
@@ -17,14 +17,14 @@
   <!-- Tipografías Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
   
   <!-- Hojas de estilo -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-  <!-- 1. ENCABEZADO PRINCIPAL (Top Header con Logo) -->
+  <!-- 1. ENCABEZADO SUPERIOR -->
   <header class="top-header">
     <div class="container header-container">
       <div class="brand-group">
@@ -35,7 +35,7 @@
           <span class="brand-badge">Librería & Artística</span>
           <h1 class="brand-title">GYM Kits Escolares</h1>
           <p class="brand-location">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             Barrio Las Magnolias, Zona Norte, Córdoba Capital
           </p>
         </div>
@@ -50,20 +50,30 @@
     </div>
   </header>
 
-  <!-- 2. BARRA FIJA SUPERIOR (Sticky Bar con Mini Logo y Filtros) -->
+  <!-- 2. BARRA FIJA SUPERIOR (Sticky Header: Título Fila 1 + Filtros Fila 2 abajo) -->
   <nav class="sticky-bar" id="stickyBar">
     <div class="container sticky-container">
-      <div class="sticky-title-wrapper">
-        <div class="sticky-title-with-logo">
-          <img src="img/logo.png" alt="Mini Logo GYM" class="sticky-mini-logo" onerror="this.style.display='none';">
-          <div>
+      
+      <!-- Fila 1: Título y resumen del catálogo -->
+      <div class="sticky-top-row">
+        <div class="sticky-title-wrapper">
+          <img src="img/logo.png" alt="Logo GYM" class="sticky-mini-logo" onerror="this.style.display='none';">
+          <div class="sticky-text-group">
             <h2 class="sticky-title">Especial Día del Maestro & Agendas 2027</h2>
-            <span class="sticky-subtitle">Armá tu lista y consultá stock directamente</span>
+            <span class="sticky-subtitle">GYM Kits Escolares • Armá tu lista</span>
           </div>
         </div>
+
+        <button class="cart-summary-btn" id="openCartBtn" title="Ver mi lista">
+          <span class="cart-icon">🛍️</span>
+          <div class="cart-btn-text">
+            <span class="cart-count" id="cartCountBadge">0</span>
+            <span class="cart-total" id="cartTotalBadge">$0</span>
+          </div>
+        </button>
       </div>
 
-      <!-- Filtros por categoría -->
+      <!-- Fila 2: Filtros de categorías ubicados ESTRICTAMENTE ABAJO DEL TÍTULO -->
       <div class="category-filters" id="categoryFilters">
         <button class="filter-btn active" data-category="all">Todos</button>
         <button class="filter-btn" data-category="Agendas 2027">Agendas 2027</button>
@@ -72,14 +82,6 @@
         <button class="filter-btn" data-category="Kits y Combos Armados">Kits de Regalo</button>
       </div>
 
-      <!-- Botón resumen de lista -->
-      <button class="cart-summary-btn" id="openCartBtn">
-        <span class="cart-icon">🛍️</span>
-        <div class="cart-btn-text">
-          <span class="cart-count" id="cartCountBadge">0 productos</span>
-          <span class="cart-total" id="cartTotalBadge">$0</span>
-        </div>
-      </button>
     </div>
   </nav>
 
@@ -98,7 +100,7 @@
     </div>
   </section>
 
-  <!-- 4. GRID DE PRODUCTOS EN ORDEN ESTRICTO DEL PDF -->
+  <!-- 4. GRID DE PRODUCTOS: 2 COLUMNAS EN CELULAR -->
   <main class="container catalog-section">
     <div class="catalog-grid" id="catalogGrid">
       <!-- Inyectados por JavaScript -->
