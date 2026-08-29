@@ -274,11 +274,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const sendOrderToWhatsApp = () => {
     const itemIds = Object.keys(cart);
     if (itemIds.length === 0) {
-      alert('Por favor selecciona al menos un producto para armar tu lista.');
+      alert('Por favor seleccioná al menos un producto para armar tu lista.');
       return;
     }
 
     let clientName = clientNameInput.value.trim();
+    if (!clientName) {
+      alert('Por favor ingresá tu nombre o curso antes de enviar el pedido.');
+      clientNameInput.focus();
+      clientNameInput.style.borderColor = '#b84355';
+      clientNameInput.style.boxShadow = '0 0 8px rgba(184, 67, 85, 0.3)';
+      return;
+    } else {
+      clientNameInput.style.borderColor = '';
+      clientNameInput.style.boxShadow = '';
+    }
     let clientNotes = clientNotesInput.value.trim();
 
     let totalMoney = 0;

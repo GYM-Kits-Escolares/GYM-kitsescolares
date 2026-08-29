@@ -447,10 +447,10 @@ const CATALOG_DATA = [
 
 // Configuración general de la tienda
 const STORE_CONFIG = {
-  storeName: "G&M Librería & Artística",
+  storeName: "GYM Kits Escolares",
   campaignTitle: "Catálogo Especial Día del Maestro - Agendas 2027",
   location: "Barrio Las Magnolias, Zona Norte, Córdoba Capital",
-  whatsappNumber: "5493513958014", // Número internacional para WhatsApp Web / App
-  displayPhone: "3513958014",
+  whatsappNumber: "5491161399992", // Número internacional para WhatsApp Web / App
+  displayPhone: "11 6139-9992",
   giftPackagingNotice: "¡Entregamos todos nuestros productos hermosamente empaquetados y listos para regalar! Podés armar tus propias combinaciones."
 };
