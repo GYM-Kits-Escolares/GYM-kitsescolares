@@ -24,78 +24,88 @@
 </head>
 <body>
 
-  <!-- 1. ENCABEZADO SUPERIOR -->
-  <header class="top-header">
-    <div class="container header-container">
-      <div class="brand-group">
-        <div class="brand-logo-container">
-          <img src="img/logo.png" alt="Logo GYM Kits Escolares" class="brand-logo" onerror="this.parentElement.style.display='none';">
+  <!-- ========================================================================
+       CONTENEDOR DE ENCABEZADOS FIJOS (PERMANECE FIJO AL HACER SCROLL)
+       ======================================================================== -->
+  <div class="fixed-headers-wrapper">
+    
+    <!-- 1. ENCABEZADO SUPERIOR -->
+    <header class="top-header">
+      <div class="container header-container">
+        <div class="brand-group">
+          <div class="brand-logo-container">
+            <img src="img/logo.png" alt="Logo GYM Kits Escolares" class="brand-logo" onerror="this.parentElement.style.display='none';">
+          </div>
+          <div class="brand-info">
+            <span class="brand-badge">Librería & Artística</span>
+            <h1 class="brand-title">GYM Kits Escolares</h1>
+            <p class="brand-location">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              Barrio Las Magnolias, Zona Norte, Córdoba Capital
+            </p>
+          </div>
         </div>
-        <div class="brand-info">
-          <span class="brand-badge">Librería & Artística</span>
-          <h1 class="brand-title">GYM Kits Escolares</h1>
-          <p class="brand-location">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            Barrio Las Magnolias, Zona Norte, Córdoba Capital
-          </p>
+        
+        <div class="header-contact">
+          <a href="https://wa.me/5493513958014" target="_blank" class="contact-pill" title="Contactar por WhatsApp">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm0 18.09c-1.49 0-2.95-.4-4.22-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.127 8.127 0 01-1.25-4.32c0-4.51 3.67-8.18 8.18-8.18 2.19 0 4.24.85 5.78 2.39a8.132 8.132 0 012.4 5.79c0 4.51-3.67 8.18-8.18 8.18z"/></svg>
+            <span>WhatsApp: <strong>3513 95-8014</strong></span>
+          </a>
         </div>
       </div>
-      
-      <div class="header-contact">
-        <a href="https://wa.me/5493513958014" target="_blank" class="contact-pill" title="Contactar por WhatsApp">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm0 18.09c-1.49 0-2.95-.4-4.22-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.127 8.127 0 01-1.25-4.32c0-4.51 3.67-8.18 8.18-8.18 2.19 0 4.24.85 5.78 2.39a8.132 8.132 0 012.4 5.79c0 4.51-3.67 8.18-8.18 8.18z"/></svg>
-          <span>WhatsApp: <strong>3513 95-8014</strong></span>
-        </a>
-      </div>
-    </div>
-  </header>
+    </header>
 
-  <!-- 2. BARRA FIJA SUPERIOR (Sticky Header: Título Fila 1 + Filtros Fila 2 abajo) -->
-  <nav class="sticky-bar" id="stickyBar">
-    <div class="container sticky-container">
-      
-      <!-- Fila 1: Título y resumen del catálogo -->
-      <div class="sticky-top-row">
-        <div class="sticky-title-wrapper">
-          <img src="img/logo.png" alt="Logo GYM" class="sticky-mini-logo" onerror="this.style.display='none';">
-          <div class="sticky-text-group">
+    <!-- 2. BARRA DE CAMPAÑA Y FILTROS -->
+    <nav class="sticky-bar" id="stickyBar">
+      <div class="container sticky-container">
+        
+        <!-- Fila 1: Título de campaña y resumen -->
+        <div class="sticky-top-row">
+          <div class="sticky-title-wrapper">
             <h2 class="sticky-title">Especial Día del Maestro & Agendas 2027</h2>
-            <span class="sticky-subtitle">GYM Kits Escolares • Armá tu lista</span>
+            <span class="sticky-subtitle">Armá tu lista y consultá stock directamente</span>
           </div>
+
+          <button class="cart-summary-btn" id="openCartBtn" title="Ver mi lista">
+            <span class="cart-icon">🛍️</span>
+            <div class="cart-btn-text">
+              <span class="cart-count" id="cartCountBadge">0 productos</span>
+              <span class="cart-total" id="cartTotalBadge">$0</span>
+            </div>
+          </button>
         </div>
 
-        <button class="cart-summary-btn" id="openCartBtn" title="Ver mi lista">
-          <span class="cart-icon">🛍️</span>
-          <div class="cart-btn-text">
-            <span class="cart-count" id="cartCountBadge">0</span>
-            <span class="cart-total" id="cartTotalBadge">$0</span>
-          </div>
-        </button>
+        <!-- Fila 2: Filtros de categorías ubicados ESTRICTAMENTE ABAJO DEL TÍTULO -->
+        <div class="category-filters" id="categoryFilters">
+          <button class="filter-btn active" data-category="all">Todos</button>
+          <button class="filter-btn" data-category="Agendas 2027">Agendas 2027</button>
+          <button class="filter-btn" data-category="Cuadernos y Anotadores">Cuadernos & Notas</button>
+          <button class="filter-btn" data-category="Escritura y Accesorios">Escritura & Sets</button>
+          <button class="filter-btn" data-category="Kits y Combos Armados">Kits de Regalo</button>
+        </div>
+
       </div>
+    </nav>
 
-      <!-- Fila 2: Filtros de categorías ubicados ESTRICTAMENTE ABAJO DEL TÍTULO -->
-      <div class="category-filters" id="categoryFilters">
-        <button class="filter-btn active" data-category="all">Todos</button>
-        <button class="filter-btn" data-category="Agendas 2027">Agendas 2027</button>
-        <button class="filter-btn" data-category="Cuadernos y Anotadores">Cuadernos & Notas</button>
-        <button class="filter-btn" data-category="Escritura y Accesorios">Escritura & Sets</button>
-        <button class="filter-btn" data-category="Kits y Combos Armados">Kits de Regalo</button>
-      </div>
+  </div>
 
-    </div>
-  </nav>
-
+  <!-- ========================================================================
+       CONTENIDO PRINCIPAL
+       ======================================================================== -->
+  
   <!-- 3. HERO BANNER -->
   <section class="hero-banner">
-    <div class="container banner-card">
-      <div class="banner-content">
-        <span class="banner-tag">🎁 Listo para entregar</span>
-        <h3>¡Entregamos todos nuestros productos hermosamente empaquetados!</h3>
-        <p>Elegí las opciones que preparamos o combiná los productos a tu gusto. Ideal para regalos individuales a la seño o conjuntos entre las familias del curso.</p>
-      </div>
-      <div class="banner-highlight">
-        <span>Sin pago previo</span>
-        <small>Confirmamos stock y coordinamos pago/entrega por WhatsApp</small>
+    <div class="container">
+      <div class="banner-card">
+        <div class="banner-content">
+          <span class="banner-tag">🎁 Listo para entregar</span>
+          <h3>¡Entregamos todos nuestros productos hermosamente empaquetados!</h3>
+          <p>Elegí las opciones que preparamos o combiná los productos a tu gusto. Ideal para regalos individuales a la seño o conjuntos entre las familias del curso.</p>
+        </div>
+        <div class="banner-highlight">
+          <span>Sin pago previo</span>
+          <small>Confirmamos stock y coordinamos pago/entrega por WhatsApp</small>
+        </div>
       </div>
     </div>
   </section>
@@ -112,7 +122,7 @@
     <aside class="cart-drawer" id="cartDrawer">
       <div class="drawer-header">
         <div style="display:flex; align-items:center; gap:10px;">
-          <img src="img/logo.png" alt="GYM Logo" style="width:36px; height:36px; border-radius:50%; object-fit:cover;" onerror="this.style.display='none';">
+          <img src="img/logo.png" alt="GYM Logo" style="width:34px; height:34px; border-radius:50%; object-fit:cover;" onerror="this.style.display='none';">
           <h3>Tu Lista de Pedido</h3>
         </div>
         <button class="close-drawer-btn" id="closeCartBtn" aria-label="Cerrar lista">&times;</button>
@@ -168,8 +178,8 @@
   <footer class="main-footer">
     <div class="container footer-container">
       <div class="footer-col">
-        <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
-          <img src="img/logo.png" alt="Logo GYM" style="width:44px; height:44px; border-radius:50%; object-fit:cover;" onerror="this.style.display='none';">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+          <img src="img/logo.png" alt="Logo GYM" style="width:38px; height:38px; border-radius:50%; object-fit:cover;" onerror="this.style.display='none';">
           <h4 style="margin:0;">GYM Kits Escolares</h4>
         </div>
         <p>Especialistas en regalos originales, agendas, papelería fina y kits escolares.</p>
