@@ -37,6 +37,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }).format(amount);
   };
 
+  // Icono según categoría para placeholder estético
+  const getCategoryIcon = (category) => {
+    switch (category) {
+      case 'Agendas 2027': return '📖';
+      case 'Cuadernos y Anotadores': return '📓';
+      case 'Escritura y Accesorios': return '✒️';
+      case 'Kits y Combos Armados': return '🎁';
+      default: return '✨';
+    }
+  };
+
   // 1. Renderizar catálogo de productos
   const renderCatalog = () => {
     catalogGrid.innerHTML = '';
@@ -46,13 +57,14 @@ document.addEventListener('DOMContentLoaded', () => {
       : CATALOG_DATA.filter(p => p.category === currentCategory);
 
     if (filteredProducts.length === 0) {
-      catalogGrid.innerHTML = `<p class="no-products-msg">No hay productos en esta categoría.</p>`;
+      catalogGrid.innerHTML = `<p class="no-products-msg" style="grid-column: 1/-1; text-align:center; padding:40px; color:#8c7e7e;">No hay productos en esta categoría.</p>`;
       return;
     }
 
     filteredProducts.forEach(product => {
       const isSelected = !!cart[product.id];
       const qty = cart[product.id] || 1;
+      const catIcon = getCategoryIcon(product.category);
 
       const card = document.createElement('article');
       card.className = `product-card ${isSelected ? 'selected' : ''}`;
@@ -60,7 +72,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       card.innerHTML = `
         <div class="product-image-container">
-          <img src="${product.image}" alt="${product.title}" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=500&auto=format&fit=crop&q=60';">
+          <div class="product-placeholder-art" id="placeholder-${product.id}">
+            <span class="product-placeholder-icon">${catIcon}</span>
+            <span class="product-placeholder-text">${product.title}</span>
+          </div>
+          <img src="${product.image}" alt="${product.title}" loading="lazy" 
+               onload="document.getElementById('placeholder-${product.id}').style.display='none';" 
+               onerror="this.style.display='none';">
           <span class="product-badge">${product.badge || product.category}</span>
         </div>
         <div class="product-body">
@@ -75,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="checkbox-custom"></span>
             <span class="checkbox-text">${isSelected ? 'En la lista' : 'Sumar a lista'}</span>
           </label>
-          <div class="qty-control ${isSelected ? 'active' : ''}">
+          <div class="qty-control">
             <button class="qty-btn minus" data-id="${product.id}" aria-label="Restar cantidad">-</button>
             <input type="number" class="qty-input" data-id="${product.id}" value="${qty}" min="1" max="99" aria-label="Cantidad">
             <button class="qty-btn plus" data-id="${product.id}" aria-label="Sumar cantidad">+</button>
@@ -199,11 +217,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const product = CATALOG_DATA.find(p => p.id === id);
       if (!product) return;
 
+      const catIcon = getCategoryIcon(product.category);
+
       const li = document.createElement('li');
       li.className = 'drawer-item';
       li.innerHTML = `
         <div class="drawer-item-img">
-          <img src="${product.image}" alt="${product.title}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=100&auto=format&fit=crop&q=60';">
+          <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#fff0eb; font-size:1.4rem;">
+            ${catIcon}
+          </div>
         </div>
         <div class="drawer-item-info">
           <h4>${product.title}</h4>
