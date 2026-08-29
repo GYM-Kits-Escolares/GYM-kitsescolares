@@ -8,7 +8,7 @@
   <!-- Favicon con Logo -->
   <link rel="icon" type="image/png" href="img/logo.png">
   
-  <!-- Meta etiquetas para compartir en WhatsApp, Facebook e Instagram -->
+  <!-- Meta etiquetas para compartir -->
   <meta property="og:title" content="GYM Kits Escolares - Catálogo Día del Maestro & Agendas 2027">
   <meta property="og:description" content="Catálogo interactivo de agendas, cuadernos y kits para regalar en el Día del Maestro. ¡Consultá stock y armá tu lista directo por WhatsApp!">
   <meta property="og:image" content="img/logo.png">
@@ -25,7 +25,7 @@
 <body>
 
   <!-- ========================================================================
-       CONTENEDOR DE ENCABEZADOS FIJOS (PERMANECE FIJO AL HACER SCROLL)
+       CONTENEDOR DE ENCABEZADOS FIJOS (AMBOS ENCABEZADOS PERMANECEN FIJOS)
        ======================================================================== -->
   <div class="fixed-headers-wrapper">
     
@@ -75,7 +75,7 @@
           </button>
         </div>
 
-        <!-- Fila 2: Filtros de categorías ubicados ESTRICTAMENTE ABAJO DEL TÍTULO -->
+        <!-- Fila 2: Filtros de categorías ubicados DEBAJO DEL TÍTULO -->
         <div class="category-filters" id="categoryFilters">
           <button class="filter-btn active" data-category="all">Todos</button>
           <button class="filter-btn" data-category="Agendas 2027">Agendas 2027</button>
@@ -202,5 +202,36 @@
   <!-- Scripts -->
   <script src="data/products.js"></script>
   <script src="js/app.js"></script>
+
+  <!-- Encabezado compacto al hacer scroll (celular y escritorio) -->
+  <script>
+    (function () {
+      var wrapper = document.querySelector('.fixed-headers-wrapper');
+      if (!wrapper) return;
+
+      var ticking = false;
+
+      function update() {
+        // Histéresis: se compacta pasando 60px y se expande al volver bajo 20px,
+        // así no titila cuando el scroll queda justo en el límite.
+        var y = window.scrollY || window.pageYOffset;
+        if (y > 60) {
+          wrapper.classList.add('is-scrolled');
+        } else if (y < 20) {
+          wrapper.classList.remove('is-scrolled');
+        }
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', function () {
+        if (!ticking) {
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      }, { passive: true });
+
+      update();
+    })();
+  </script>
 </body>
 </html>

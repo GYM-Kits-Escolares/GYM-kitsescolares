@@ -42,7 +42,7 @@
 }
 
 /* ==========================================================================
-   RESET & OVERFLOW CONTROL
+   RESET & CONTROL DE ANCHO
    ========================================================================== */
 
 *, *::before, *::after {
@@ -51,10 +51,20 @@
   padding: 0;
 }
 
+/* IMPORTANTE: `overflow-x: hidden` en html/body ROMPE `position: sticky`
+   (el navegador convierte al elemento en contenedor de scroll y el encabezado
+   deja de fijarse). Usamos `clip`, que corta el desborde horizontal SIN
+   romper sticky. `hidden` queda primero como respaldo para navegadores viejos. */
 html, body {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
+  overflow-x: clip;
+}
+
+html {
+  /* Evita que los anclajes internos queden tapados por el encabezado fijo */
+  scroll-padding-top: 150px;
 }
 
 body {
@@ -79,10 +89,11 @@ body {
 }
 
 /* ==========================================================================
-   CONTENEDOR DE AMBOS ENCABEZADOS FIJOS (PERMANECE ARRIBA AL HACER SCROLL)
+   CONTENEDOR DE AMBOS ENCABEZADOS FIJOS (PERMANECE FIJO ARRIBA)
    ========================================================================== */
 
 .fixed-headers-wrapper {
+  position: -webkit-sticky; /* iOS Safari antiguo */
   position: sticky;
   top: 0;
   left: 0;
@@ -91,9 +102,59 @@ body {
   background-color: #ffffff;
   border-bottom: 1.5px solid var(--border-soft);
   box-shadow: 0 4px 16px rgba(70, 40, 40, 0.08);
+  transition: box-shadow 0.2s ease;
 }
 
-/* 1. Encabezado Superior (Logo, Nombre y WhatsApp) */
+/* Sombra más marcada sólo cuando ya se hizo scroll */
+.fixed-headers-wrapper.is-scrolled {
+  box-shadow: 0 6px 20px rgba(70, 40, 40, 0.14);
+}
+
+/* --------------------------------------------------------------------------
+   MODO COMPACTO: al bajar, el encabezado superior se achica para no comerse
+   la pantalla del celular. Se activa con la clase .is-scrolled (ver index.html)
+   -------------------------------------------------------------------------- */
+
+.top-header,
+.brand-logo-container,
+.brand-title,
+.brand-location,
+.brand-badge {
+  transition: all 0.2s ease;
+}
+
+.fixed-headers-wrapper.is-scrolled .top-header {
+  padding: 4px 0;
+}
+
+.fixed-headers-wrapper.is-scrolled .brand-logo-container {
+  width: 36px;
+  height: 36px;
+}
+
+.fixed-headers-wrapper.is-scrolled .brand-title {
+  font-size: 1rem;
+}
+
+.fixed-headers-wrapper.is-scrolled .brand-location,
+.fixed-headers-wrapper.is-scrolled .brand-badge,
+.fixed-headers-wrapper.is-scrolled .sticky-subtitle {
+  display: none;
+}
+
+/* Si alguien prefiere no ver animaciones */
+@media (prefers-reduced-motion: reduce) {
+  .fixed-headers-wrapper,
+  .top-header,
+  .brand-logo-container,
+  .brand-title,
+  .brand-location,
+  .brand-badge {
+    transition: none;
+  }
+}
+
+/* 1. Encabezado Superior */
 .top-header {
   background: linear-gradient(180deg, #ffffff 0%, #fff8f5 100%);
   border-bottom: 1px solid #faece6;
@@ -187,7 +248,7 @@ body {
   box-shadow: 0 2px 8px rgba(37, 211, 102, 0.25);
 }
 
-/* 2. Barra de Campaña y Filtros (Fila 1: Título | Fila 2: Botones) */
+/* 2. Barra de Campaña y Filtros */
 .sticky-bar {
   background-color: #ffffff;
   padding: 6px 0 6px 0;
@@ -230,7 +291,7 @@ body {
 }
 
 .cart-summary-btn {
-  display: none; /* En celular usamos la barra flotante inferior */
+  display: none;
   align-items: center;
   gap: 6px;
   background: linear-gradient(135deg, var(--rose-deep) 0%, #9e2a3b 100%);
@@ -264,7 +325,7 @@ body {
   font-family: var(--font-cute);
 }
 
-/* Fila 2: Filtros de Categorías UBICADOS ESTRICTAMENTE DEBAJO */
+/* Fila de Filtros UBICADA DEBAJO DEL TÍTULO */
 .category-filters {
   display: flex;
   gap: 6px;
@@ -378,7 +439,7 @@ body {
 }
 
 /* ==========================================================================
-   4. GRID DE PRODUCTOS (2 COLUMNAS EN CELULAR)
+   4. GRID DE PRODUCTOS: 2 COLUMNAS EN CELULAR
    ========================================================================== */
 
 .catalog-section {
@@ -414,7 +475,7 @@ body {
   position: relative;
   width: 100%;
   padding-top: 100%; /* Cuadrado 1:1 */
-  background: linear-gradient(135deg, #fff2ed 0%, #fde8e0 100%);
+  background: linear-gradient(135deg, #fffdfc 0%, #fff6f2 100%);
   overflow: hidden;
 }
 
@@ -424,8 +485,11 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  /* `contain` en vez de `cover`: las fotos del catálogo son apaisadas y con
+     `cover` quedaban recortadas mostrando sólo una franja del producto. */
+  object-fit: contain;
   object-position: center;
+  padding: 6px;
 }
 
 .product-placeholder-art {
@@ -738,7 +802,8 @@ body {
 .drawer-item-img img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  background-color: #ffffff;
 }
 
 .drawer-item-info {
@@ -1063,4 +1128,49 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
+}
+/* ==========================================================================
+   AJUSTES MÓVIL PARA EL ENCABEZADO FIJO
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  /* El encabezado fijo nunca debe ocupar más de ~30% de la pantalla */
+  .fixed-headers-wrapper {
+    max-height: 32vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .fixed-headers-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .top-header {
+    padding: 6px 0;
+  }
+
+  .brand-logo-container {
+    width: 40px;
+    height: 40px;
+  }
+
+  .brand-title {
+    font-size: 1.02rem;
+  }
+
+  /* El pill de WhatsApp en pantallas muy chicas: sólo el ícono */
+  @media (max-width: 400px) {
+    .contact-pill span {
+      display: none;
+    }
+    .contact-pill {
+      padding: 8px;
+    }
+  }
+}
+
+/* Respeta la zona segura de iPhone en la barra flotante inferior */
+.mobile-floating-bar {
+  padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
 }
